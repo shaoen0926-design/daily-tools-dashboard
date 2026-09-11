@@ -1,0 +1,247 @@
+{
+  "schemaVersion": 1,
+  "workspaceRoot": "/Users/ShaoEn/Project_Codex/日常工具",
+  "tools": [
+    {
+      "id": "finance",
+      "name": "財務工具",
+      "alias": "日積",
+      "icon": "wallet",
+      "description": "把薪資、演講收入、投資與日常支出，慢慢記清楚。",
+      "category": "生活管理",
+      "status": "待確認",
+      "projectPath": "財務工具",
+      "readmePath": "財務工具/README.md",
+      "launches": [
+        {
+          "type": "web",
+          "primary": true,
+          "label": "主要線上版",
+          "url": "https://passbook-4kkd3o.firebaseapp.com",
+          "note": "使用自己的 Google 帳號登入。網址來自專案文件，本次未驗證線上可用性。"
+        },
+        {
+          "type": "instructions",
+          "label": "Mac 本機版（含股票報價）",
+          "note": "需要 Node.js 22 以上。本機資料與線上版分開，搬移資料請使用工具內的備份功能。",
+          "steps": [
+            "第一次使用：在 firebase 子資料夾執行 npm ci，再執行 python3 build.py。",
+            "之後啟動：在同一資料夾執行 npm run dev。"
+          ],
+          "cwd": "財務工具/firebase",
+          "command": "npm run dev",
+          "url": "http://127.0.0.1:8791/"
+        }
+      ],
+      "nextAction": null,
+      "source": "財務工具/README.md",
+      "lastReviewedAt": "2026-09-11"
+    },
+    {
+      "id": "tasks",
+      "name": "待辦事項",
+      "alias": "序日",
+      "icon": "check",
+      "description": "安排待辦、整理研究筆記，也留下每次討論的下一步。",
+      "category": "工作學習",
+      "status": "待確認",
+      "projectPath": "待辦事項",
+      "readmePath": "待辦事項/README.md",
+      "launches": [
+        {
+          "type": "web",
+          "primary": true,
+          "label": "個人工作台",
+          "url": "https://focus-desk-shaoen.shaoen.chatgpt.site/",
+          "note": "依網站流程登入。網址來自專案文件，本次未驗證線上可用性。"
+        },
+        {
+          "type": "instructions",
+          "label": "Mac 本機開發",
+          "note": "需要 Node.js 22.13 以上；本機使用測試資料庫。以終端機列出的 Local 網址為準。",
+          "steps": [
+            "第一次使用：在專案內執行 npm ci，再執行 npm run db:migrate:local。",
+            "之後啟動：執行 npm run dev。"
+          ],
+          "cwd": "待辦事項",
+          "command": "npm run dev"
+        }
+      ],
+      "nextAction": null,
+      "source": "待辦事項/README.md",
+      "lastReviewedAt": "2026-09-11"
+    },
+    {
+      "id": "sports",
+      "name": "運動追蹤",
+      "alias": "揮躍",
+      "icon": "sport",
+      "description": "記錄羽球、籃球與球技練習，看見每週的累積。",
+      "category": "生活管理",
+      "status": "待確認",
+      "projectPath": "運動追蹤",
+      "readmePath": "運動追蹤/README.md",
+      "launches": [
+        {
+          "type": "instructions",
+          "primary": true,
+          "label": "Mac 本機網頁",
+          "note": "需要 Node.js 23.6 以上。紀錄存在目前瀏覽器，請在工具內定期備份。",
+          "steps": [
+            "第一次使用：在專案內執行 npm ci。",
+            "之後啟動：執行 npm run dev，以終端機顯示的網址為準。",
+            "手機使用：Mac 保持運作，手機連同一個 Wi-Fi，開啟終端機顯示的區網網址。"
+          ],
+          "cwd": "運動追蹤",
+          "command": "npm run dev"
+        },
+        {
+          "type": "file",
+          "label": "建置後的離線檔案",
+          "path": "運動追蹤/dist/index.html",
+          "note": "先在專案內執行 npm run build，再以 Finder 雙擊 dist/index.html。此檔案入口與本機網址的資料各自保存。"
+        }
+      ],
+      "nextAction": null,
+      "source": "運動追蹤/README.md",
+      "lastReviewedAt": "2026-09-11"
+    },
+    {
+      "id": "travel",
+      "name": "旅行日記",
+      "alias": "拾旅",
+      "icon": "map",
+      "description": "收藏家人一起走過的地方、照片與旅行故事。",
+      "category": "旅行文化",
+      "status": "待確認",
+      "projectPath": "旅行日記",
+      "readmePath": null,
+      "launches": [],
+      "nextAction": "補上 README，確認常用網址與完整啟動流程。",
+      "source": "旅行日記/app/layout.tsx（名稱與用途）",
+      "lastReviewedAt": "2026-09-11"
+    },
+    {
+      "id": "museum",
+      "name": "博物館工具",
+      "alias": "美術館鏡頭",
+      "icon": "museum",
+      "description": "在烏菲茲拍下作品，讀懂畫作，也收藏喜歡的細節。",
+      "category": "旅行文化",
+      "status": "待確認",
+      "projectPath": "博物館工具",
+      "readmePath": "博物館工具/README.md",
+      "launches": [
+        {
+          "type": "web",
+          "primary": true,
+          "label": "線上版",
+          "url": "https://shaoen0926-design.github.io/uffizi-gallery-helper/",
+          "note": "可在手機開啟並加入主畫面。離線使用前需先完成資料下載；網址來自專案文件。"
+        },
+        {
+          "type": "instructions",
+          "label": "Mac 本機開發",
+          "steps": [
+            "第一次使用：在 app 子資料夾執行 npm install。",
+            "之後啟動：在 app 子資料夾執行 npm run dev。"
+          ],
+          "cwd": "博物館工具/app",
+          "command": "npm run dev",
+          "note": "以終端機列出的網址為準；資料管線的使用方式另見專案 README。"
+        }
+      ],
+      "nextAction": null,
+      "source": "博物館工具/README.md",
+      "lastReviewedAt": "2026-09-11"
+    },
+    {
+      "id": "audience",
+      "name": "問答工具",
+      "alias": "共鳴",
+      "icon": "chat",
+      "description": "讓大家一起投票、提問與互動，收集現場的想法。",
+      "category": "工作學習",
+      "status": "待確認",
+      "projectPath": "問答工具",
+      "readmePath": "問答工具/README.md",
+      "launches": [
+        {
+          "type": "instructions",
+          "primary": true,
+          "label": "Mac 本機開發",
+          "steps": [
+            "第一次使用：在專案內執行 npm ci。",
+            "初始化本機資料庫：npx wrangler d1 migrations apply DB --local --config wrangler.local.json。",
+            "之後啟動：npm run dev -- --port 3012。"
+          ],
+          "cwd": "問答工具",
+          "command": "npm run dev -- --port 3012",
+          "url": "http://localhost:3012/",
+          "note": "常用線上入口待登錄。本機 QR Code 的 localhost 無法讓現場手機連到 Mac；正式活動需另使用公開入口。"
+        }
+      ],
+      "nextAction": "登錄平常使用的線上入口。",
+      "source": "問答工具/README.md",
+      "lastReviewedAt": "2026-09-11"
+    },
+    {
+      "id": "downloads",
+      "name": "影片下載",
+      "alias": "影片下載器",
+      "icon": "media",
+      "description": "貼上影音網址，選擇畫質，下載需要留存的內容。",
+      "category": "媒體",
+      "status": "待確認",
+      "projectPath": "影片下載",
+      "readmePath": "影片下載/README.md",
+      "launches": [
+        {
+          "type": "file",
+          "primary": true,
+          "label": "Mac 啟動程式",
+          "path": "影片下載/影片下載器.app",
+          "steps": [
+            "在 Finder 開啟影片下載資料夾。",
+            "雙擊「影片下載器.app」，它會開啟終端機與瀏覽器。",
+            "用完關閉該終端機視窗即可。"
+          ],
+          "note": "需已安裝 yt-dlp、ffmpeg 與 gallery-dl。連接埠可能依占用情況改變，以程式開啟的網址為準。"
+        }
+      ],
+      "nextAction": null,
+      "source": "影片下載/README.md",
+      "lastReviewedAt": "2026-09-11"
+    },
+    {
+      "id": "chat",
+      "name": "聊天工具",
+      "alias": "小聊天室",
+      "icon": "code",
+      "description": "用兩個分頁互相傳訊息，理解即時聊天怎麼運作。",
+      "category": "開發練習",
+      "status": "待確認",
+      "projectPath": "聊天工具",
+      "readmePath": "聊天工具/README.md",
+      "launches": [
+        {
+          "type": "instructions",
+          "primary": true,
+          "label": "Mac 本機示範",
+          "steps": [
+            "第一次使用：在專案內執行 npm install。",
+            "之後啟動：執行 npm start。",
+            "在此 Mac 開兩個分頁、取不同暱稱，就能互相傳訊息。"
+          ],
+          "cwd": "聊天工具",
+          "command": "npm start",
+          "url": "http://localhost:3000",
+          "note": "訊息沒有保存，重新整理會消失；這是沒有登入與分房功能的示範工具。手機請使用 Mac 的區網 IP 與相同連接埠。"
+        }
+      ],
+      "nextAction": "確認是否需要獨立 Git 版本管理。",
+      "source": "聊天工具/README.md",
+      "lastReviewedAt": "2026-09-11"
+    }
+  ]
+}
