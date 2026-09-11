@@ -1,0 +1,16 @@
+{
+  "name": "daily-tools-dashboard",
+  "version": "1.0.0",
+  "private": true,
+  "description": "日常工具的本機目錄：搜尋、分類、釘選與啟動說明。",
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs",
+    "dev": "node server.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "sync:overview": "node scripts/sync-overview.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

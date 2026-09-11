@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#087f83" />
+    <meta
+      name="description"
+      content="自己的日常工具，一處找到。搜尋、分類、釘選，以及每個工具的開啟方式。"
+    />
+    <title>日常工具｜我的工具目錄</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23087f83'/%3E%3Cg fill='white'%3E%3Crect x='7' y='7' width='7' height='7' rx='2'/%3E%3Crect x='18' y='7' width='7' height='7' rx='2'/%3E%3Crect x='7' y='18' width='7' height='7' rx='2'/%3E%3Crect x='18' y='18' width='7' height='7' rx='2'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <script type="module" src="./app.mjs"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳到工具清單</a>
+    <aside class="sidebar" aria-label="工具目錄導覽">
+      <a class="brand" href="./" aria-label="日常工具首頁"
+        ><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span
+        ><span>日常<span class="brand-caption">我的工具目錄</span></span></a
+      >
+      <nav aria-label="工具範圍" class="scope-nav">
+        <button class="nav-item active" data-scope="all" aria-pressed="true">
+          <span data-icon="grid"></span>所有工具<span class="nav-count" id="all-count">—</span>
+        </button>
+        <button class="nav-item" data-scope="pinned" aria-pressed="false">
+          <span data-icon="star"></span>常用工具<span class="nav-count" id="pin-count">0</span>
+        </button>
+      </nav>
+      <div class="nav-label">依用途尋找</div>
+      <nav id="category-nav" class="category-nav" aria-label="工具分類"></nav>
+      <div class="sidebar-bottom">
+        <button class="playground-link" id="playground-button" aria-label="Playground 實驗區">
+          <span class="playground-symbol" data-icon="flask"></span
+          ><span><strong>Playground</strong><small>留一點空間，試試新想法</small></span
+          ><span data-icon="arrow"></span>
+        </button>
+        <p class="local-note"><span data-icon="monitor"></span>個人本機目錄</p>
+      </div>
+    </aside>
+    <main id="main" class="main" tabindex="-1">
+      <div class="topline">
+        <span>我的工作空間 <span class="slash">/</span> 工具目錄</span
+        ><span class="topline-right">一個工具，一個小幫手</span>
+      </div>
+      <header class="page-heading">
+        <div>
+          <p class="eyebrow">YOUR EVERYDAY TOOLKIT</p>
+          <h1 id="page-title">所有工具</h1>
+          <p class="page-description" id="page-description">從這裡，接著做你想做的事。</p>
+        </div>
+        <span class="collection-count" id="collection-count">— 個工具</span>
+      </header>
+      <div id="storage-warning" class="notice" role="status" hidden></div>
+      <div class="toolbar">
+        <label class="search-box"
+          ><span data-icon="search"></span
+          ><input
+            id="search"
+            type="search"
+            placeholder="搜尋工具、名稱或用途…"
+            aria-label="搜尋工具、名稱或用途"
+            autocomplete="off"
+          /><kbd aria-hidden="true">/</kbd></label
+        >
+        <label class="status-control"
+          ><span>狀態</span
+          ><select id="status" aria-label="使用狀態">
+            <option value="all">全部狀態</option>
+            <option>待確認</option>
+            <option>開發中</option>
+            <option>使用中</option>
+            <option>暫停</option>
+          </select></label
+        >
+      </div>
+      <div class="results-heading">
+        <div>
+          <h2 id="results-title">工具清單</h2>
+          <span id="result-count" role="status" aria-live="polite"></span>
+        </div>
+        <button id="clear-filters" class="text-button" hidden>清除篩選</button>
+      </div>
+      <section id="pinned-section" class="pinned-section" aria-labelledby="pinned-title" hidden>
+        <h2 id="pinned-title"><span data-icon="star"></span>常用工具</h2>
+        <div id="pinned-grid" class="tool-grid"></div>
+      </section>
+      <section id="tool-grid" class="tool-grid" aria-label="工具清單">
+        <div class="loading-state" role="status">正在整理你的工具…</div>
+      </section>
+      <div id="empty-state" class="empty-state" hidden>
+        <div class="empty-symbol" data-icon="search"></div>
+        <h2 id="empty-title">沒有符合的工具</h2>
+        <p id="empty-description">換個關鍵字，或清除篩選再看看。</p>
+        <button id="empty-reset" class="primary-button">顯示所有工具</button>
+      </div>
+      <div id="error-state" class="empty-state" role="alert" hidden>
+        <div class="empty-symbol" data-icon="folder"></div>
+        <h2>工具清單暫時無法載入</h2>
+        <p id="error-description"></p>
+        <button id="retry" class="primary-button">重新載入</button>
+      </div>
+      <footer class="main-footer">
+        <span>依自己的步調，慢慢把工具做好。</span><span id="review-note">入口依專案文件整理</span>
+      </footer>
+    </main>
+    <dialog id="detail-dialog" aria-labelledby="detail-title">
+      <div class="dialog-shell">
+        <button id="close-dialog" class="icon-button dialog-close" aria-label="關閉工具詳情">
+          ×
+        </button>
+        <div id="detail-content"></div>
+        <p id="dialog-feedback" role="status" hidden></p>
+      </div>
+    </dialog>
+    <div class="toast" id="toast" role="status" hidden></div>
+    <noscript><p class="noscript">請啟用 JavaScript 以使用搜尋、分類與工具清單。</p></noscript>
+  </body>
+</html>
