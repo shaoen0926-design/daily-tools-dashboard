@@ -4,10 +4,12 @@ import {
   readPins,
   writePins,
   CATEGORIES,
+  ORIGINS,
   STATUSES,
 } from "./catalog.mjs";
 
 const icons = {
+  calendar: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18m-13 4h2m4 0h2m-8 3h2"/>',
   grid: '<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
   star: '<path d="m12 3 2.8 5.8 6.4.9-4.6 4.5 1.1 6.3-5.7-3-5.7 3 1.1-6.3L2.8 9.7l6.4-.9Z"/>',
   search: '<circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/>',
@@ -39,19 +41,15 @@ const esc = (value) =>
     (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c],
   );
 document.querySelectorAll("[data-icon]").forEach((el) => (el.innerHTML = icon(el.dataset.icon)));
-const categories = [
-  ["工作學習", "work"],
-  ["生活管理", "home"],
-  ["旅行文化", "map"],
-  ["媒體", "media"],
-  ["開發練習", "code"],
-];
+const categoryIcons = ["wallet", "map", "work", "media", "check", "home", "code"];
+const categories = CATEGORIES.map((name, i) => [name, categoryIcons[i]]);
 const state = {
   tools: [],
   query: "",
   category: "all",
   status: "all",
   scope: "all",
+  origin: "all",
   pins: new Set(),
   root: "",
   loaded: false,
@@ -61,7 +59,7 @@ const dialog = $("#detail-dialog");
 let toastTimer;
 let returnFocus;
 let storageWarning = null;
-const fullPath = (relative) => `${state.root.replace(/\/$/, "")}/${relative}`;
+const fullPath = (relative, root = state.root) => `${root.replace(/\/$/, "")}/${relative}`;
 const shellQuote = (value) => `'${value.replaceAll("'", "'\\''")}'`;
 const isHandheld = () =>
   /Android|iPhone|iPad|iPod/.test(navigator.userAgent) ||
@@ -88,7 +86,7 @@ function showStorageWarning(message) {
 
 function card(tool) {
   const web = tool.launches.find((x) => x.primary && x.type === "web");
-  return `<article class="tool-card" data-tool-id="${esc(tool.id)}"><div class="card-top"><div class="tool-icon">${icon(tool.icon)}</div><button class="icon-button" data-pin="${esc(tool.id)}" aria-label="${state.pins.has(tool.id) ? "取消釘選" : "釘選"}${esc(tool.alias)}" aria-pressed="${state.pins.has(tool.id)}" title="${state.pins.has(tool.id) ? "取消常用" : "加入常用"}">${icon("star")}</button></div><div class="card-title-line"><h3>${esc(tool.alias)}</h3><span class="tool-name">${esc(tool.name)}</span></div><p class="tool-description">${esc(tool.description)}</p><div class="card-metadata"><span class="category-label">${esc(tool.category)}</span><span class="status-label">${esc(tool.status)}</span></div><div class="card-actions">${web ? `<a class="card-primary" href="${esc(web.url)}" target="_blank" rel="noopener noreferrer" aria-label="開啟${esc(tool.alias)}網站">開啟網站${icon("external")}</a>` : `<button class="card-primary" data-detail="${esc(tool.id)}" aria-label="${tool.launches.length ? "查看" + esc(tool.alias) + "啟動說明" : "查看" + esc(tool.alias) + "待補入口"}">${tool.launches.length ? "啟動說明" : "待補入口"}${icon("arrow")}</button>`}<button class="card-secondary" data-detail="${esc(tool.id)}" aria-label="${esc(tool.alias)}的詳情">詳情</button></div></article>`;
+  return `<article class="tool-card" data-tool-id="${esc(tool.id)}"><div class="module-id" aria-hidden="true">MODULE / ${String(state.tools.indexOf(tool) + 1).padStart(2, "0")}</div><div class="card-top"><div class="tool-icon">${icon(tool.icon)}</div><button class="icon-button" data-pin="${esc(tool.id)}" aria-label="${state.pins.has(tool.id) ? "取消釘選" : "釘選"}${esc(tool.alias)}" aria-pressed="${state.pins.has(tool.id)}" title="${state.pins.has(tool.id) ? "取消常用" : "加入常用"}">${icon("star")}</button></div><div class="card-title-line"><h3>${esc(tool.alias)}</h3>${tool.name !== tool.alias ? `<span class="tool-name">${esc(tool.name)}</span>` : ""}</div><p class="tool-description">${esc(tool.description)}</p><div class="card-metadata"><span class="category-label">${esc(tool.category)}</span><span class="status-label">${esc(tool.status)}</span></div><div class="tool-tags">${tool.tags.map(tag => `<span class="tool-tag">${esc(tag)}</span>`).join("")}</div><div class="tool-origin">${esc(tool.origin)}</div><div class="card-actions">${web ? `<a class="card-primary" href="${esc(web.url)}" target="_blank" rel="noopener noreferrer" aria-label="開啟${esc(tool.alias)}網站">開啟網站${icon("external")}</a>` : `<button class="card-primary" data-detail="${esc(tool.id)}" aria-label="${tool.launches.length ? "查看" + esc(tool.alias) + "啟動說明" : "查看" + esc(tool.alias) + "待補入口"}">${tool.launches.length ? "啟動說明" : "待補入口"}${icon("arrow")}</button>`}<button class="card-secondary" data-detail="${esc(tool.id)}" aria-label="${esc(tool.alias)}的詳情">詳情</button></div></article>`;
 }
 function render() {
   if (!state.loaded) return;
@@ -100,11 +98,14 @@ function render() {
   $("#pinned-section").hidden = !pinned.length;
   $("#all-count").textContent = state.tools.length;
   $("#pin-count").textContent = state.pins.size;
+  $("#favorite-count").textContent = String(state.pins.size).padStart(2, "0");
+  $("#sector-count").textContent = String(new Set(state.tools.map(tool => tool.category)).size).padStart(2, "0");
+  $("#source-count").textContent = String(new Set(state.tools.map(tool => tool.origin)).size).padStart(2, "0");
   $("#collection-count").textContent = `${state.tools.length} 個工具`;
   $("#result-count").textContent = `${tools.length} 個`;
   $("#empty-state").hidden = tools.length > 0;
   $("#clear-filters").hidden =
-    !state.query && state.category === "all" && state.status === "all" && state.scope === "all";
+    !state.query && state.category === "all" && state.status === "all" && state.scope === "all" && state.origin === "all";
   $("#page-title").textContent =
     state.scope === "pinned" ? "常用工具" : state.category !== "all" ? state.category : "所有工具";
   $("#page-description").textContent =
@@ -139,6 +140,8 @@ function clearFilters() {
   state.category = "all";
   state.status = "all";
   state.scope = "all";
+  state.origin = "all";
+  $("#origin").value = "all";
   $("#search").value = "";
   $("#status").value = "all";
   render();
@@ -153,15 +156,15 @@ function setPinned(id, pinned) {
   notify(pinned ? `${tool.alias}已加入常用` : `${tool.alias}已取消常用`);
   return { id, pinned, saved: !storageWarning };
 }
-function pathBox(relative, label) {
-  const value = fullPath(relative);
+function pathBox(relative, label, root = state.root) {
+  const value = fullPath(relative, root);
   return `<div class="path-box"><code>${esc(value)}</code><button data-copy="${esc(value)}" aria-label="複製${esc(label)}">複製</button></div>`;
 }
-function launchBox(launch) {
+function launchBox(launch, root = state.root) {
   const command = launch.command
-    ? `cd ${shellQuote(fullPath(launch.cwd))}\n${launch.command}`
+    ? `cd ${shellQuote(fullPath(launch.cwd, root))}\n${launch.command}`
     : null;
-  return `<div class="launch-box"><h4>${esc(launch.label)}</h4>${launch.note ? `<p>${esc(launch.note)}</p>` : ""}${launch.steps?.length ? `<ol>${launch.steps.map((step) => `<li>${esc(step)}</li>`).join("")}</ol>` : ""}${launch.path ? pathBox(launch.path, "啟動檔案路徑") : ""}${command ? `<pre><code>${esc(command)}</code></pre><button class="copy-button" data-copy="${esc(command)}" aria-label="複製${esc(launch.label)}指令">複製啟動指令</button>` : ""}${launch.url ? (launch.type === "web" ? `<a href="${esc(launch.url)}" target="_blank" rel="noopener noreferrer">開啟網站 ${icon("external")}</a>` : `<p class="local-instruction">請先啟動工具。本機網址：<span>${esc(launch.url)}</span></p><p class="mobile-instruction">手機需改用 Mac 的區網網址；localhost 只代表目前這台裝置。</p>${isHandheld() ? "" : `<a class="desktop-local-link" href="${esc(launch.url)}" target="_blank" rel="noopener noreferrer">在這台電腦開啟 ${icon("external")}</a>`}`) : ""}</div>`;
+  return `<div class="launch-box"><h4>${esc(launch.label)}</h4>${launch.note ? `<p>${esc(launch.note)}</p>` : ""}${launch.steps?.length ? `<ol>${launch.steps.map((step) => `<li>${esc(step)}</li>`).join("")}</ol>` : ""}${launch.path ? pathBox(launch.path, "啟動檔案路徑", root) : ""}${command ? `<pre><code>${esc(command)}</code></pre><button class="copy-button" data-copy="${esc(command)}" aria-label="複製${esc(launch.label)}指令">複製啟動指令</button>` : ""}${launch.url ? (launch.type === "web" ? `<a href="${esc(launch.url)}" target="_blank" rel="noopener noreferrer">開啟網站 ${icon("external")}</a>` : `<p class="local-instruction">請先啟動工具。本機網址：<span>${esc(launch.url)}</span></p><p class="mobile-instruction">手機需改用 Mac 的區網網址；localhost 只代表目前這台裝置。</p>${isHandheld() ? "" : `<a class="desktop-local-link" href="${esc(launch.url)}" target="_blank" rel="noopener noreferrer">在這台電腦開啟 ${icon("external")}</a>`}`) : ""}</div>`;
 }
 function showDialog(html) {
   returnFocus = document.activeElement;
@@ -175,7 +178,7 @@ function showTool(id) {
   const tool = state.tools.find((tool) => tool.id === id);
   if (!tool) return;
   showDialog(
-    `<div class="detail-heading"><div class="tool-icon">${icon(tool.icon)}</div><div><h2 id="detail-title">${esc(tool.alias)}</h2><span class="tool-name">${esc(tool.name)} · ${esc(tool.category)} · ${esc(tool.status)}</span></div></div><p class="detail-description">${esc(tool.description)}</p><section class="detail-section"><h3>開啟方式</h3>${tool.launches.length ? tool.launches.map(launchBox).join("") : '<div class="launch-box"><h4>常用入口待補</h4><p>這個工具已列入目錄，確認網址或啟動流程後，就能在這裡找到入口。</p></div>'}</section><section class="detail-section"><h3>專案位置</h3>${pathBox(tool.projectPath, "專案位置")}</section><section class="detail-section"><h3>README 使用說明</h3>${tool.readmePath ? `${pathBox(tool.readmePath, "README 路徑")}<p class="path-hint">可在 Finder 按 ⇧⌘G，貼上路徑開啟。</p>` : "<p>尚未建立 README；啟動方式與資料保存位置仍待整理。</p>"}</section><section class="detail-section"><h3>下一步</h3><p>${esc(tool.nextAction || "尚未登錄，先照自己的步調使用。")}</p></section><details class="detail-source"><summary>資料來源與核對紀錄</summary><p>${esc(tool.source)}</p><p>文件核對：${esc(tool.lastReviewedAt || "待確認")}。使用狀態由你確認；文件核對不代表工具正在執行或網站可用。</p></details>`,
+    `<div class="detail-heading"><div class="tool-icon">${icon(tool.icon)}</div><div><h2 id="detail-title">${esc(tool.alias)}</h2><span class="tool-name">${tool.name !== tool.alias ? esc(tool.name) + " · " : ""}${esc(tool.category)} · ${esc(tool.status)}</span></div></div><p class="detail-description">${esc(tool.description)}</p><section class="detail-section"><h3>開啟方式</h3>${tool.launches.length ? tool.launches.map(launch => launchBox(launch, tool.workspaceRoot || state.root)).join("") : '<div class="launch-box"><h4>常用入口待補</h4><p>這個工具已列入目錄，確認網址或啟動流程後，就能在這裡找到入口。</p></div>'}</section><section class="detail-section"><h3>專案位置</h3>${pathBox(tool.projectPath, "專案位置", tool.workspaceRoot || state.root)}</section><section class="detail-section"><h3>README 使用說明</h3>${tool.readmePath ? `${pathBox(tool.readmePath, "README 路徑", tool.workspaceRoot || state.root)}<p class="path-hint">可在 Finder 按 ⇧⌘G，貼上路徑開啟。</p>` : "<p>尚未建立 README；啟動方式與資料保存位置仍待整理。</p>"}</section><section class="detail-section"><h3>下一步</h3><p>${esc(tool.nextAction || "尚未登錄，先照自己的步調使用。")}</p></section><details class="detail-source"><summary>資料來源與核對紀錄</summary><p>${esc(tool.source)}</p><p>文件核對：${esc(tool.lastReviewedAt || "待確認")}。使用狀態由你確認；文件核對不代表工具正在執行或網站可用。</p></details>`,
   );
 }
 function showPlayground() {
@@ -211,6 +214,10 @@ async function copyText(button) {
 }
 $("#search").addEventListener("input", (event) => {
   state.query = event.target.value;
+  render();
+});
+$("#origin").addEventListener("change", (event) => {
+  state.origin = event.target.value;
   render();
 });
 $("#status").addEventListener("change", (event) => {
@@ -290,6 +297,7 @@ async function loadCatalog() {
     );
     state.pins = pins;
     showStorageWarning(warning);
+    $("#origin").innerHTML = '<option value="all">全部來源</option>' + ORIGINS.map(origin => `<option value="${esc(origin)}">${esc(origin)} (${state.tools.filter(t => t.origin === origin).length})</option>`).join("");
     renderCategories();
     render();
     registerAgentTools();
@@ -322,6 +330,7 @@ function registerAgentTools() {
         type: "object",
         properties: {
           query: { type: "string" },
+          origin: { type: "string", enum: ["all", ...ORIGINS] },
           category: { type: "string", enum: ["all", ...CATEGORIES] },
           status: { type: "string", enum: ["all", ...STATUSES] },
         },
@@ -332,12 +341,15 @@ function registerAgentTools() {
         if (
           !input ||
           typeof input !== "object" ||
-          Object.keys(input).some((key) => !["query", "category", "status"].includes(key)) ||
+          Object.keys(input).some((key) => !["query", "category", "status", "origin"].includes(key)) ||
+          (input.origin !== undefined && !["all", ...ORIGINS].includes(input.origin)) ||
           (input.query !== undefined && typeof input.query !== "string") ||
           (input.category !== undefined && !["all", ...CATEGORIES].includes(input.category)) ||
           (input.status !== undefined && !["all", ...STATUSES].includes(input.status))
         )
           throw new Error("搜尋條件無效。");
+        state.origin = input.origin || "all";
+        $("#origin").value = state.origin;
         state.query = input.query || "";
         state.category = input.category || "all";
         state.status = input.status || "all";

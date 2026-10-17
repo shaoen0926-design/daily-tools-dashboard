@@ -1040,3 +1040,13 @@ dialog::backdrop {
     transition: none !important;
   }
 }
+
+/* Classification and cross-project discovery */
+.toolbar { flex-wrap: wrap; }
+.search-box { min-width: min(100%, 240px); }
+.source-control { min-width: 0; }
+.source-control select { max-width: 210px; }
+.tool-tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 10px; }
+.tool-tag { font-size: 12px; line-height: 1.5; padding: 3px 8px; background: #edf4f4; color: #326269; border-radius: 6px; }
+.tool-origin { font-size: 11px; color: #657580; overflow-wrap: anywhere; margin-bottom: 16px; }
+@media (max-width: 600px) { .source-control { width: 100%; } .source-control select { max-width: 100%; min-width: 0; } }

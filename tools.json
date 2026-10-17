@@ -8,7 +8,7 @@
       "alias": "日積",
       "icon": "wallet",
       "description": "把薪資、演講收入、投資與日常支出，慢慢記清楚。",
-      "category": "生活管理",
+      "category": "財務訂閱",
       "status": "待確認",
       "projectPath": "財務工具",
       "readmePath": "財務工具/README.md",
@@ -35,15 +35,20 @@
       ],
       "nextAction": null,
       "source": "財務工具/README.md",
-      "lastReviewedAt": "2026-09-11"
+      "lastReviewedAt": "2026-10-15",
+      "tags": [
+        "記帳",
+        "收支"
+      ],
+      "origin": "日常工具"
     },
     {
       "id": "tasks",
-      "name": "待辦事項",
-      "alias": "序日",
+      "name": "序日-待辦",
+      "alias": "序日-待辦",
       "icon": "check",
       "description": "安排待辦、整理研究筆記，也留下每次討論的下一步。",
-      "category": "工作學習",
+      "category": "工作行政",
       "status": "待確認",
       "projectPath": "待辦事項",
       "readmePath": "待辦事項/README.md",
@@ -69,22 +74,33 @@
       ],
       "nextAction": null,
       "source": "待辦事項/README.md",
-      "lastReviewedAt": "2026-09-11"
+      "lastReviewedAt": "2026-10-15",
+      "tags": [
+        "待辦",
+        "筆記"
+      ],
+      "origin": "日常工具"
     },
     {
       "id": "sports",
       "name": "運動追蹤",
       "alias": "揮躍",
       "icon": "sport",
-      "description": "記錄羽球、籃球與球技練習，看見每週的累積。",
-      "category": "生活管理",
+      "description": "記錄運動、技巧練習與身體回報，查看趨勢與成就，支援 Google 登入同步。",
+      "category": "生活旅行",
       "status": "待確認",
       "projectPath": "運動追蹤",
       "readmePath": "運動追蹤/README.md",
       "launches": [
         {
+          "type": "web",
+          "label": "正式網站",
+          "url": "https://huiyue-shaoen0926.web.app/",
+          "note": "入口依專案文件更新；本次未登入驗證。",
+          "primary": true
+        },
+        {
           "type": "instructions",
-          "primary": true,
           "label": "Mac 本機網頁",
           "note": "需要 Node.js 23.6 以上。紀錄存在目前瀏覽器，請在工具內定期備份。",
           "steps": [
@@ -104,22 +120,32 @@
       ],
       "nextAction": null,
       "source": "運動追蹤/README.md",
-      "lastReviewedAt": "2026-09-11"
+      "lastReviewedAt": "2026-10-15",
+      "tags": [
+        "運動",
+        "紀錄"
+      ],
+      "origin": "日常工具"
     },
     {
       "id": "travel",
-      "name": "旅行日記",
-      "alias": "拾旅",
+      "name": "拾旅-旅行日記",
+      "alias": "拾旅-旅行日記",
       "icon": "map",
       "description": "收藏家人一起走過的地方、照片與旅行故事。",
-      "category": "旅行文化",
+      "category": "生活旅行",
       "status": "待確認",
       "projectPath": "旅行日記",
       "readmePath": null,
       "launches": [],
       "nextAction": "補上 README，確認常用網址與完整啟動流程。",
       "source": "旅行日記/app/layout.tsx（名稱與用途）",
-      "lastReviewedAt": "2026-09-11"
+      "lastReviewedAt": "2026-10-15",
+      "tags": [
+        "旅行",
+        "家庭"
+      ],
+      "origin": "日常工具"
     },
     {
       "id": "museum",
@@ -127,7 +153,7 @@
       "alias": "美術館鏡頭",
       "icon": "museum",
       "description": "在烏菲茲拍下作品，讀懂畫作，也收藏喜歡的細節。",
-      "category": "旅行文化",
+      "category": "生活旅行",
       "status": "待確認",
       "projectPath": "博物館工具",
       "readmePath": "博物館工具/README.md",
@@ -153,7 +179,12 @@
       ],
       "nextAction": null,
       "source": "博物館工具/README.md",
-      "lastReviewedAt": "2026-09-11"
+      "lastReviewedAt": "2026-10-15",
+      "tags": [
+        "藝術",
+        "導覽"
+      ],
+      "origin": "日常工具"
     },
     {
       "id": "audience",
@@ -161,7 +192,7 @@
       "alias": "共鳴",
       "icon": "chat",
       "description": "讓大家一起投票、提問與互動，收集現場的想法。",
-      "category": "工作學習",
+      "category": "學習教學",
       "status": "待確認",
       "projectPath": "問答工具",
       "readmePath": "問答工具/README.md",
@@ -183,7 +214,13 @@
       ],
       "nextAction": "登錄平常使用的線上入口。",
       "source": "問答工具/README.md",
-      "lastReviewedAt": "2026-09-11"
+      "lastReviewedAt": "2026-10-15",
+      "tags": [
+        "互動",
+        "投票",
+        "教學"
+      ],
+      "origin": "日常工具"
     },
     {
       "id": "downloads",
@@ -191,7 +228,7 @@
       "alias": "影片下載器",
       "icon": "media",
       "description": "貼上影音網址，選擇畫質，下載需要留存的內容。",
-      "category": "媒體",
+      "category": "文件創作",
       "status": "待確認",
       "projectPath": "影片下載",
       "readmePath": "影片下載/README.md",
@@ -211,7 +248,12 @@
       ],
       "nextAction": null,
       "source": "影片下載/README.md",
-      "lastReviewedAt": "2026-09-11"
+      "lastReviewedAt": "2026-10-15",
+      "tags": [
+        "影音",
+        "下載"
+      ],
+      "origin": "日常工具"
     },
     {
       "id": "chat",
@@ -219,7 +261,7 @@
       "alias": "小聊天室",
       "icon": "code",
       "description": "用兩個分頁互相傳訊息，理解即時聊天怎麼運作。",
-      "category": "開發練習",
+      "category": "程式開發",
       "status": "待確認",
       "projectPath": "聊天工具",
       "readmePath": "聊天工具/README.md",
@@ -241,7 +283,783 @@
       ],
       "nextAction": "確認是否需要獨立 Git 版本管理。",
       "source": "聊天工具/README.md",
-      "lastReviewedAt": "2026-09-11"
+      "lastReviewedAt": "2026-10-15",
+      "tags": [
+        "聊天",
+        "練習"
+      ],
+      "origin": "日常工具"
+    },
+    {
+      "id": "banheng-scheduler",
+      "name": "班衡｜排班管理器",
+      "alias": "班衡｜排班管理器",
+      "icon": "calendar",
+      "description": "預填休假、產生排班初稿與手動調整，支援雲端共用、PDF 下載及 Excel 匯出。",
+      "category": "工作行政",
+      "status": "使用中",
+      "projectPath": "排班工具",
+      "readmePath": "排班工具/README.md",
+      "launches": [
+        {
+          "type": "web",
+          "label": "正式網站",
+          "url": "https://banheng-shaoen0926.firebaseapp.com/",
+          "note": "入口依專案文件更新；本次未登入驗證。",
+          "primary": true
+        },
+        {
+          "type": "web",
+          "label": "正式網站",
+          "url": "https://banheng-shaoen0926.web.app/",
+          "note": "使用已授權的 Google 帳號登入，可共同查看與修改班表。正式網址取自專案 README，本次未登入驗證。"
+        },
+        {
+          "type": "file",
+          "label": "啟動班衡",
+          "path": "排班工具/啟動班衡.command",
+          "note": "雙擊啟動，使用期間保持終端機視窗開啟。不登入時使用原本的本機班表；登入後可切換至雲端模式。"
+        },
+        {
+          "type": "instructions",
+          "label": "本機網址",
+          "steps": [
+            "先雙擊啟動班衡.command，再開啟本機網址。"
+          ],
+          "cwd": "排班工具",
+          "command": "npm start",
+          "url": "http://127.0.0.1:4319/"
+        }
+      ],
+      "nextAction": null,
+      "source": "排班工具/README.md",
+      "lastReviewedAt": "2026-10-15",
+      "tags": [
+        "排班",
+        "人資"
+      ],
+      "origin": "日常工具"
+    },
+    {
+      "id": "course-sprout",
+      "name": "課芽-線上課程追蹤器",
+      "alias": "課芽-線上課程追蹤器",
+      "icon": "media",
+      "description": "集中線上課程、學習足跡與成果，支援 Google 登入和跨裝置同步。",
+      "category": "學習教學",
+      "status": "待確認",
+      "projectPath": "線上課程",
+      "readmePath": "線上課程/README.md",
+      "launches": [
+        {
+          "type": "web",
+          "label": "正式網站",
+          "url": "https://course-sprout-shaoen0926.firebaseapp.com/",
+          "note": "入口依專案文件更新；本次未登入驗證。",
+          "primary": true
+        },
+        {
+          "type": "file",
+          "label": "啟動課芽",
+          "path": "線上課程/啟動課芽.command",
+          "url": "http://127.0.0.1:4331/",
+          "note": "2.0 手機與同步程式已實作，正式部署待選定 Firebase 專案；目前仍可使用本機版。"
+        },
+        {
+          "type": "instructions",
+          "label": "終端機啟動",
+          "steps": [
+            "在「線上課程」資料夾執行 npm start。",
+            "開啟 http://127.0.0.1:4331/。"
+          ],
+          "cwd": "線上課程",
+          "command": "npm start",
+          "url": "http://127.0.0.1:4331/",
+          "note": "需要 Node.js 22 以上；首次先執行 npm ci。"
+        }
+      ],
+      "nextAction": null,
+      "source": "線上課程/README.md",
+      "lastReviewedAt": "2026-10-15",
+      "tags": [
+        "課程",
+        "進度"
+      ],
+      "origin": "日常工具"
+    },
+    {
+      "id": "subscription-manager",
+      "name": "節流-訂閱管理器",
+      "alias": "節流-訂閱管理器",
+      "icon": "wallet",
+      "description": "管理訂閱、續費與匯率估算，支援雲端同步及舊資料匯入。",
+      "category": "財務訂閱",
+      "status": "待確認",
+      "projectPath": "測試工具",
+      "readmePath": "測試工具/README.md",
+      "launches": [
+        {
+          "type": "web",
+          "label": "正式網站",
+          "url": "https://jieliu-shaoen0926.web.app/",
+          "note": "入口依專案文件更新；本次未登入驗證。",
+          "primary": true
+        },
+        {
+          "type": "file",
+          "label": "開啟節流 HTML",
+          "path": "測試工具/訂閱與續費管理器.html",
+          "steps": [
+            "在 Finder 開啟「測試工具」資料夾。",
+            "雙擊「訂閱與續費管理器.html」，固定使用原本的瀏覽器及檔案位置。"
+          ],
+          "note": "不需安裝套件。資料存在瀏覽器；扣款日期需手動更新，提醒只在工具開啟時顯示。"
+        }
+      ],
+      "nextAction": null,
+      "source": "測試工具/開發與驗收指南.md、測試工具/訂閱與續費管理器.html",
+      "lastReviewedAt": "2026-10-15",
+      "tags": [
+        "訂閱",
+        "續費"
+      ],
+      "origin": "日常工具"
+    },
+    {
+      "id": "document-studio",
+      "name": "頁匠｜PDF 編輯器",
+      "alias": "頁匠｜PDF 編輯器",
+      "icon": "media",
+      "description": "合併、排序及編輯 PDF，加入文字、圖片、簽章並匯出文件。",
+      "category": "文件創作",
+      "status": "待確認",
+      "workspaceRoot": "/Users/ShaoEn/Project_Ai",
+      "projectPath": "文檔工具",
+      "readmePath": "文檔工具/README.md",
+      "launches": [
+        {
+          "type": "file",
+          "label": "啟動頁匠｜PDF 編輯器",
+          "path": "文檔工具/啟動文檔工具.command",
+          "url": "http://127.0.0.1:5188/",
+          "steps": [
+            "在 Finder 開啟 Project_Ai／文檔工具，雙擊「啟動文檔工具.command」。",
+            "保留終端機視窗；關閉或重新整理頁面前，先匯出 PDF。"
+          ],
+          "note": "文件在瀏覽器記憶體中處理，目前沒有草稿自動儲存。",
+          "primary": true
+        }
+      ],
+      "nextAction": null,
+      "source": "文檔工具/README.md",
+      "lastReviewedAt": "2026-10-15",
+      "tags": [
+        "PDF",
+        "文件"
+      ],
+      "origin": "Project_Ai"
+    },
+    {
+      "id": "tw-labor-reply",
+      "name": "勞基法回覆助手（醫院版）",
+      "alias": "勞基法回覆助手（醫院版）",
+      "icon": "chat",
+      "description": "整理員工勞動條件質疑，產出評估、引用與回覆草稿；以 Skill 形式使用。",
+      "category": "工作行政",
+      "status": "待確認",
+      "workspaceRoot": "/Users/ShaoEn/Project_Ai",
+      "projectPath": "勞基法回覆助手",
+      "readmePath": "勞基法回覆助手/README.md",
+      "launches": [
+        {
+          "type": "instructions",
+          "label": "Skill 使用說明",
+          "steps": [
+            "依專案 README，在 Claude Code 使用 /tw-labor-reply，或將 dist/tw-labor-reply.skill 匯入 Claude 的 Skills。",
+            "貼入要評估的問題，依 Skill 流程取得評估與回覆草稿。"
+          ],
+          "note": "這是 Skill 專案，沒有獨立網頁啟動入口；安裝與維護方式以專案 README 為準。",
+          "primary": true
+        }
+      ],
+      "nextAction": null,
+      "source": "勞基法回覆助手/README.md",
+      "lastReviewedAt": "2026-10-15",
+      "tags": [
+        "人資",
+        "法規",
+        "Skill"
+      ],
+      "origin": "Project_Ai"
+    },
+    {
+      "id": "lipid-drug-selector",
+      "name": "健保降血脂藥給付選藥工具",
+      "alias": "健保降血脂藥給付選藥工具",
+      "icon": "check",
+      "description": "依輸入條件輔助查閱降血脂藥給付規則與品項，附本機驗證紀錄。",
+      "category": "醫療專業",
+      "status": "待確認",
+      "workspaceRoot": "/Users/ShaoEn/Project_Ai",
+      "projectPath": "藥品工具",
+      "readmePath": null,
+      "launches": [
+        {
+          "type": "file",
+          "label": "開啟選藥工具 HTML",
+          "path": "藥品工具/健保降血脂藥給付選藥工具.html",
+          "steps": [
+            "在 Finder 開啟 Project_Ai／藥品工具。",
+            "雙擊「健保降血脂藥給付選藥工具.html」。"
+          ],
+          "note": "目前檔案標示 115/9/1 新制；本次僅整理入口，未重新核對法規或臨床適用性。驗證紀錄位於 verification 資料夾。",
+          "primary": true
+        }
+      ],
+      "nextAction": "補上 README，並維護資料適用日期與驗證紀錄。",
+      "source": "藥品工具/健保降血脂藥給付選藥工具.html、藥品工具/verification/修正紀錄.md",
+      "lastReviewedAt": "2026-10-15",
+      "tags": [
+        "醫療",
+        "藥品",
+        "健保"
+      ],
+      "origin": "Project_Ai"
+    },
+    {
+      "id": "worldvision-ai-workshop",
+      "name": "AI 工作坊實作練習",
+      "alias": "AI 工作坊實作練習",
+      "icon": "code",
+      "description": "世界展望會課程專案：行政、行銷與跨部門工作的 AI 練習、整合任務與教學素材。",
+      "category": "學習教學",
+      "status": "待確認",
+      "workspaceRoot": "/Users/ShaoEn/Claude_Ai_Course",
+      "projectPath": "世界展望會_AI工作坊",
+      "readmePath": "世界展望會_AI工作坊/publish/ai-workshop-practice/README.md",
+      "launches": [
+        {
+          "type": "web",
+          "label": "線上實作頁",
+          "url": "https://shaoen0926-design.github.io/ai-workshop-practice/",
+          "note": "網址取自專案 README；本次未驗證線上可用性。",
+          "primary": true
+        },
+        {
+          "type": "file",
+          "label": "本機新版實作頁",
+          "path": "世界展望會_AI工作坊/out/index-v2.html",
+          "steps": [
+            "在 Finder 開啟下方檔案路徑，雙擊檔案。"
+          ],
+          "note": "四個新版 HTML 需留在同一資料夾；線上與本機的學習進度各自保存。"
+        }
+      ],
+      "nextAction": null,
+      "source": "世界展望會_AI工作坊/publish/ai-workshop-practice/README.md",
+      "lastReviewedAt": "2026-10-15",
+      "tags": [
+        "課程",
+        "行政"
+      ],
+      "origin": "Claude_Ai_Course"
+    },
+    {
+      "id": "baojia-ai-workshop",
+      "name": "寶佳機構行政庶務 AI 實作工具",
+      "alias": "寶佳機構行政庶務 AI 實作工具",
+      "icon": "code",
+      "description": "行政庶務情境的 AI 練習、整合任務、素材與 Excel 練習檔。",
+      "category": "學習教學",
+      "status": "待確認",
+      "workspaceRoot": "/Users/ShaoEn/Claude_Ai_Course",
+      "projectPath": "寶佳機構",
+      "readmePath": "寶佳機構/README.md",
+      "launches": [
+        {
+          "type": "web",
+          "label": "線上實作頁",
+          "url": "https://shaoen0926-design.github.io/baojia-ai-workshop/",
+          "note": "網址取自專案 README；本次未驗證線上可用性。",
+          "primary": true
+        },
+        {
+          "type": "file",
+          "label": "本機網站首頁",
+          "path": "寶佳機構/網站/index.html",
+          "steps": [
+            "在 Finder 開啟下方檔案路徑，雙擊檔案。"
+          ],
+          "note": "保留整個「網站」資料夾，供跨頁導覽及附件下載；教材使用虛構資料。"
+        }
+      ],
+      "nextAction": null,
+      "source": "寶佳機構/README.md",
+      "lastReviewedAt": "2026-10-15",
+      "tags": [
+        "課程",
+        "行政"
+      ],
+      "origin": "Claude_Ai_Course"
+    },
+    {
+      "id": "taian-ai-workshop",
+      "name": "泰安產險 AI 工作坊 手機實作頁",
+      "alias": "泰安產險 AI 工作坊 手機實作頁",
+      "icon": "code",
+      "description": "提供泰安產險 AI 簡報工作坊的手機練習頁與提詞素材。",
+      "category": "學習教學",
+      "status": "待確認",
+      "workspaceRoot": "/Users/ShaoEn/Claude_Ai_Course",
+      "projectPath": "泰安產險_AI簡報工作坊",
+      "readmePath": "泰安產險_AI簡報工作坊/site/README.md",
+      "launches": [
+        {
+          "type": "file",
+          "label": "本機實作頁",
+          "path": "泰安產險_AI簡報工作坊/site/index.html",
+          "steps": [
+            "在 Finder 開啟下方檔案路徑，雙擊檔案。"
+          ],
+          "note": "靜態 HTML，教學素材為虛構資料。文件提及 GitHub Pages，但未登錄明確正式網址。",
+          "primary": true
+        }
+      ],
+      "nextAction": "補登已確認的正式網站網址。",
+      "source": "泰安產險_AI簡報工作坊/site/README.md",
+      "lastReviewedAt": "2026-10-15",
+      "tags": [
+        "課程",
+        "簡報"
+      ],
+      "origin": "Claude_Ai_Course"
+    },
+    {
+      "id": "physician-ai-workshop",
+      "name": "醫師AI工作坊實作頁",
+      "alias": "醫師AI工作坊實作頁",
+      "icon": "code",
+      "description": "醫院醫師的四節 AI 手機實作課程，含練習提詞與教學素材。",
+      "category": "學習教學",
+      "status": "待確認",
+      "workspaceRoot": "/Users/ShaoEn/Claude_Ai_Course",
+      "projectPath": "醫師AI工作坊",
+      "readmePath": null,
+      "launches": [
+        {
+          "type": "file",
+          "label": "本機實作頁",
+          "path": "醫師AI工作坊/out/index.html",
+          "steps": [
+            "在 Finder 開啟下方檔案路徑，雙擊檔案。"
+          ],
+          "note": "使用獨立網頁 index.html；同資料夾另有提詞卡。",
+          "primary": true
+        }
+      ],
+      "nextAction": "補上 README 與常用線上入口。",
+      "source": "醫師AI工作坊/out/index.html、醫師AI工作坊/spec.json",
+      "lastReviewedAt": "2026-10-15",
+      "tags": [
+        "醫療",
+        "課程"
+      ],
+      "origin": "Claude_Ai_Course"
+    },
+    {
+      "id": "chroma-lab",
+      "name": "拾色｜取色配色器",
+      "alias": "拾色｜取色配色器",
+      "icon": "media",
+      "description": "圖片五色分析、像素取色、螢幕滴管與漸層 CSS，圖片在本機處理。",
+      "category": "文件創作",
+      "status": "待確認",
+      "workspaceRoot": "/Users/ShaoEn/Claude_Ai_Course",
+      "projectPath": "世界展望會_AI工作坊/chroma-lab",
+      "readmePath": "世界展望會_AI工作坊/chroma-lab/README.md",
+      "launches": [
+        {
+          "type": "file",
+          "label": "開啟色彩實驗室",
+          "path": "世界展望會_AI工作坊/chroma-lab/開啟色彩實驗室.command",
+          "steps": [
+            "在 Finder 開啟下方檔案路徑，雙擊檔案。"
+          ],
+          "note": "啟動後開啟 http://127.0.0.1:4173/，保留終端機視窗；重新整理不保留圖片與取色。",
+          "primary": true
+        },
+        {
+          "type": "instructions",
+          "label": "終端機啟動",
+          "cwd": "世界展望會_AI工作坊/chroma-lab",
+          "command": "python3 -m http.server 4173 --bind 127.0.0.1 --directory dist",
+          "url": "http://127.0.0.1:4173/",
+          "note": "需要 Python 3；不需 npm 套件。螢幕滴管支援依瀏覽器而異。"
+        }
+      ],
+      "nextAction": null,
+      "source": "世界展望會_AI工作坊/chroma-lab/README.md",
+      "lastReviewedAt": "2026-10-15",
+      "tags": [
+        "配色",
+        "圖片",
+        "本機"
+      ],
+      "origin": "Claude_Ai_Course"
+    },
+    {
+      "id": "ai-lab-page-builder",
+      "name": "AI 工作坊實作頁產生器",
+      "alias": "AI 工作坊實作頁產生器",
+      "icon": "code",
+      "description": "由 JSON 規格產生工作坊手機實作頁、練習卡與提詞卡的 ai-lab-page-builder Skill。",
+      "category": "程式開發",
+      "status": "待確認",
+      "workspaceRoot": "/Users/ShaoEn",
+      "projectPath": "Claude_Ai_Course",
+      "readmePath": null,
+      "launches": [
+        {
+          "type": "file",
+          "label": "Skill 安裝包",
+          "path": "Claude_Ai_Course/ai-lab-page-builder.skill",
+          "steps": [
+            "在支援 .skill 匯入的環境，選擇下方 ai-lab-page-builder.skill 安裝包。",
+            "安裝後提供課程主題與規格，依 Skill 流程產生實作頁。"
+          ],
+          "note": "這是 Skill 安裝包，不是可直接執行的網頁；請在支援 .skill 匯入的環境安裝後使用。",
+          "primary": true
+        },
+        {
+          "type": "file",
+          "label": "Skill 測試報告",
+          "path": "Claude_Ai_Course/skill-review-ai-lab-page-builder.html",
+          "steps": [
+            "在 Finder 開啟下方檔案路徑，雙擊檔案。"
+          ],
+          "note": "此頁是測試檢視報告，不是產生器操作介面。"
+        }
+      ],
+      "nextAction": "補上獨立的安裝、使用與維護 README。",
+      "source": "Claude_Ai_Course/ai-lab-page-builder.skill 內的 SKILL.md、Claude_Ai_Course/skill測試結果.md",
+      "lastReviewedAt": "2026-10-15",
+      "tags": [
+        "Skill",
+        "自動化",
+        "教學"
+      ],
+      "origin": "Claude_Ai_Course"
+    },
+    {
+      "id": "mindfulness",
+      "name": "靜域｜正念練習室",
+      "alias": "靜域｜正念練習室",
+      "icon": "home",
+      "description": "呼吸練習、五感覺察與情緒筆記，留一段時間回到此刻。",
+      "category": "生活旅行",
+      "status": "待確認",
+      "projectPath": "正念工具",
+      "readmePath": null,
+      "launches": [
+        {
+          "type": "file",
+          "label": "開啟本機工具",
+          "path": "正念工具/index.html",
+          "steps": [
+            "在 Finder 開啟下方檔案路徑，固定使用同一瀏覽器與原本檔案位置。"
+          ],
+          "note": "資料保存與操作限制以專案說明為準。",
+          "primary": true
+        }
+      ],
+      "nextAction": "補上 README，記錄使用方式與資料保存限制。",
+      "source": "正念工具/index.html",
+      "lastReviewedAt": "2026-10-15",
+      "tags": [
+        "正念",
+        "呼吸",
+        "本機"
+      ],
+      "origin": "日常工具"
+    },
+    {
+      "id": "sleep-orbit",
+      "name": "眠軌｜睡眠追蹤器",
+      "alias": "眠軌｜睡眠追蹤器",
+      "icon": "home",
+      "description": "追蹤睡眠紀錄與趨勢，支援手動匯入 Apple 健康 XML；初次為示範資料。",
+      "category": "生活旅行",
+      "status": "待確認",
+      "projectPath": "睡眠追蹤",
+      "readmePath": "睡眠追蹤/README.md",
+      "launches": [
+        {
+          "type": "file",
+          "label": "開啟本機工具",
+          "path": "睡眠追蹤/index.html",
+          "steps": [
+            "在 Finder 開啟下方檔案路徑，固定使用同一瀏覽器與原本檔案位置。"
+          ],
+          "note": "資料保存與操作限制以專案說明為準。",
+          "primary": true
+        }
+      ],
+      "nextAction": null,
+      "source": "睡眠追蹤/README.md",
+      "lastReviewedAt": "2026-10-15",
+      "tags": [
+        "睡眠",
+        "健康",
+        "匯入"
+      ],
+      "origin": "日常工具"
+    },
+    {
+      "id": "habit-orbit",
+      "name": "微序｜習慣養成器",
+      "alias": "微序｜習慣養成器",
+      "icon": "home",
+      "description": "以兩分鐘行動、習慣打卡與成長紀錄建立日常節奏；示範與個人資料分開。",
+      "category": "生活旅行",
+      "status": "待確認",
+      "projectPath": "習慣養成",
+      "readmePath": "習慣養成/README.md",
+      "launches": [
+        {
+          "type": "file",
+          "label": "開啟本機工具",
+          "path": "習慣養成/index.html",
+          "steps": [
+            "在 Finder 開啟下方檔案路徑，固定使用同一瀏覽器與原本檔案位置。"
+          ],
+          "note": "資料保存與操作限制以專案說明為準。",
+          "primary": true
+        }
+      ],
+      "nextAction": null,
+      "source": "習慣養成/README.md",
+      "lastReviewedAt": "2026-10-15",
+      "tags": [
+        "習慣",
+        "打卡",
+        "本機"
+      ],
+      "origin": "日常工具"
+    },
+    {
+      "id": "water-coffee",
+      "name": "澄衡-水咖紀錄",
+      "alias": "澄衡-水咖紀錄",
+      "icon": "home",
+      "description": "記錄喝水與咖啡杯數，查看七日趨勢、目標及成就，支援 JSON 備份。",
+      "category": "生活旅行",
+      "status": "待確認",
+      "projectPath": "沁衡-水咖紀錄",
+      "readmePath": "沁衡-水咖紀錄/README.md",
+      "launches": [
+        {
+          "type": "web",
+          "label": "正式網站",
+          "url": "https://shaoen0926-design.github.io/chengheng-water-coffee/",
+          "note": "入口依專案文件更新；本次未登入驗證。",
+          "primary": true
+        }
+      ],
+      "nextAction": null,
+      "source": "沁衡-水咖紀錄/README.md",
+      "lastReviewedAt": "2026-10-15",
+      "tags": [
+        "喝水",
+        "咖啡",
+        "紀錄"
+      ],
+      "origin": "日常工具"
+    },
+    {
+      "id": "haleon-workshop",
+      "name": "Haleon AI 職場實作課",
+      "alias": "Haleon AI 職場實作課",
+      "icon": "check",
+      "description": "職場 AI 練習、提詞及內外勤 Excel 教材。",
+      "category": "學習教學",
+      "status": "待確認",
+      "projectPath": "Haleon_1002_課程包/04_手機實作頁",
+      "readmePath": "Haleon_1002_課程包/04_手機實作頁/README.md",
+      "launches": [
+        {
+          "type": "web",
+          "label": "正式網站",
+          "url": "https://shaoen0926-design.github.io/haleon-ai-workshop-1002/",
+          "note": "入口依專案文件更新；本次未登入驗證。",
+          "primary": true
+        }
+      ],
+      "nextAction": null,
+      "source": "Haleon_1002_課程包/04_手機實作頁/README.md",
+      "lastReviewedAt": "2026-10-15",
+      "tags": [
+        "課程",
+        "職場"
+      ],
+      "origin": "Claude_Ai_Course",
+      "workspaceRoot": "/Users/ShaoEn/Claude_Ai_Course"
+    },
+    {
+      "id": "chiayi-workshop",
+      "name": "嘉義醫院｜骨鬆衛教 AI 實作",
+      "alias": "嘉義醫院｜骨鬆衛教 AI 實作",
+      "icon": "check",
+      "description": "以骨鬆衛教簡報為主題的醫療人員 AI 練習與整合任務。",
+      "category": "學習教學",
+      "status": "待確認",
+      "projectPath": "嘉義醫院",
+      "readmePath": "嘉義醫院/README.md",
+      "launches": [
+        {
+          "type": "web",
+          "label": "正式網站",
+          "url": "https://shaoen0926-design.github.io/chiayi-osteoporosis-ai-workshop/",
+          "note": "入口依專案文件更新；本次未登入驗證。",
+          "primary": true
+        }
+      ],
+      "nextAction": null,
+      "source": "嘉義醫院/README.md",
+      "lastReviewedAt": "2026-10-15",
+      "tags": [
+        "醫療",
+        "課程"
+      ],
+      "origin": "Claude_Ai_Course",
+      "workspaceRoot": "/Users/ShaoEn/Claude_Ai_Course"
+    },
+    {
+      "id": "ebm-faculty-lab",
+      "name": "EBM 師資實作室｜實證師資班",
+      "alias": "EBM 師資實作室｜實證師資班",
+      "icon": "check",
+      "description": "以研究設計為主題，練習實證教學、簡報與互動網頁。",
+      "category": "學習教學",
+      "status": "待確認",
+      "projectPath": "世界展望會_AI工作坊/實證師資班",
+      "readmePath": "世界展望會_AI工作坊/實證師資班/README.md",
+      "launches": [
+        {
+          "type": "web",
+          "label": "正式網站",
+          "url": "https://shaoen0926-design.github.io/ebm-faculty-ai-lab/",
+          "note": "入口依專案文件更新；本次未登入驗證。",
+          "primary": true
+        }
+      ],
+      "nextAction": null,
+      "source": "世界展望會_AI工作坊/實證師資班/README.md",
+      "lastReviewedAt": "2026-10-15",
+      "tags": [
+        "實證",
+        "師資",
+        "課程"
+      ],
+      "origin": "Claude_Ai_Course",
+      "workspaceRoot": "/Users/ShaoEn/Claude_Ai_Course"
+    },
+    {
+      "id": "osteoporosis-lab",
+      "name": "骨鬆 AI 實作室｜醫療精華版",
+      "alias": "骨鬆 AI 實作室｜醫療精華版",
+      "icon": "check",
+      "description": "11 題精華實作，協助製作骨鬆衛教簡報與小測驗。",
+      "category": "學習教學",
+      "status": "待確認",
+      "projectPath": "世界展望會_AI工作坊/骨質疏鬆",
+      "readmePath": "世界展望會_AI工作坊/骨質疏鬆/README.md",
+      "launches": [
+        {
+          "type": "web",
+          "label": "正式網站",
+          "url": "https://shaoen0926-design.github.io/osteoporosis-ai-lab/",
+          "note": "入口依專案文件更新；本次未登入驗證。",
+          "primary": true
+        }
+      ],
+      "nextAction": null,
+      "source": "世界展望會_AI工作坊/骨質疏鬆/README.md",
+      "lastReviewedAt": "2026-10-15",
+      "tags": [
+        "醫療",
+        "課程"
+      ],
+      "origin": "Claude_Ai_Course",
+      "workspaceRoot": "/Users/ShaoEn/Claude_Ai_Course"
+    },
+    {
+      "id": "tokyo-ai-lab",
+      "name": "AI 起步實驗室｜東京旅行篇",
+      "alias": "AI 起步實驗室｜東京旅行篇",
+      "icon": "check",
+      "description": "以東京旅行情境練習 AI 文字、圖像與 NotebookLM，含 12 題入門實作。",
+      "category": "學習教學",
+      "status": "待確認",
+      "projectPath": "世界展望會_AI工作坊/output",
+      "readmePath": "世界展望會_AI工作坊/output/README.md",
+      "launches": [
+        {
+          "type": "file",
+          "label": "開啟本機工具",
+          "path": "世界展望會_AI工作坊/output/index.html",
+          "steps": [
+            "在 Finder 開啟下方檔案路徑，固定使用同一瀏覽器與原本檔案位置。"
+          ],
+          "note": "資料保存與操作限制以專案說明為準。",
+          "primary": true
+        }
+      ],
+      "nextAction": null,
+      "source": "世界展望會_AI工作坊/output/README.md",
+      "lastReviewedAt": "2026-10-15",
+      "tags": [
+        "旅行",
+        "入門",
+        "課程"
+      ],
+      "origin": "Claude_Ai_Course",
+      "workspaceRoot": "/Users/ShaoEn/Claude_Ai_Course"
+    },
+    {
+      "id": "classroom-wall",
+      "name": "共映｜課堂成果牆",
+      "alias": "共映｜課堂成果牆",
+      "icon": "check",
+      "description": "課堂作品展示、任務分區、留言與老師審核，支援成果匯出。",
+      "category": "學習教學",
+      "status": "待確認",
+      "projectPath": "世界展望會_AI工作坊/classroom-wall",
+      "readmePath": "世界展望會_AI工作坊/classroom-wall/README.md",
+      "launches": [
+        {
+          "type": "instructions",
+          "label": "本機啟動說明",
+          "cwd": "世界展望會_AI工作坊/classroom-wall",
+          "command": "PORT=4320 HOST=127.0.0.1 npm start",
+          "url": "http://127.0.0.1:4320/",
+          "steps": [
+            "第一次使用先執行 npm ci。",
+            "使用下方指令啟動；首次老師管理需依專案 README 設定。"
+          ],
+          "note": "原專案預設 4318 與工具總覽衝突，此入口改用 4320 並僅供此 Mac 使用。尚未公開部署，手機課堂連線需另設定。",
+          "primary": true
+        }
+      ],
+      "nextAction": null,
+      "source": "世界展望會_AI工作坊/classroom-wall/README.md",
+      "lastReviewedAt": "2026-10-15",
+      "tags": [
+        "教學",
+        "互動",
+        "作品"
+      ],
+      "origin": "Claude_Ai_Course",
+      "workspaceRoot": "/Users/ShaoEn/Claude_Ai_Course"
     }
   ]
 }

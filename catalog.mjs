@@ -1,4 +1,5 @@
-export const CATEGORIES = ["工作學習", "生活管理", "旅行文化", "媒體", "開發練習"];
+export const CATEGORIES = ["財務訂閱", "生活旅行", "工作行政", "文件創作", "學習教學", "醫療專業", "程式開發"];
+export const ORIGINS = ["日常工具", "Project_Ai", "Claude_Ai_Course"];
 export const STATUSES = ["待確認", "開發中", "使用中", "暫停"];
 export const PIN_KEY = "daily-tools.pins.v1";
 
@@ -51,6 +52,9 @@ export function validateCatalog(catalog) {
       "工具 id 必須唯一，且使用小寫英數與連字號。",
     );
     ids.add(tool.id);
+    requireValue(ORIGINS.includes(tool.origin), `${tool.id} 的來源分類無效。`);
+    requireValue(Array.isArray(tool.tags) && tool.tags.length > 0 && tool.tags.every(text) && new Set(tool.tags).size === tool.tags.length, `${tool.id} 的標籤無效。`);
+    requireValue(tool.workspaceRoot === undefined || (text(tool.workspaceRoot) && tool.workspaceRoot.startsWith("/") && !tool.workspaceRoot.includes("\0") && !tool.workspaceRoot.includes("\\") && tool.workspaceRoot.split("/").slice(1).every(part => part && part !== "." && part !== "..")), `${tool.id} 的 workspaceRoot 無效。`);
     requireValue(
       ["name", "alias", "description", "source"].every((key) => text(tool[key])),
       `${tool.id} 缺少名稱、用途或來源。`,
@@ -110,17 +114,18 @@ export function validateCatalog(catalog) {
 
 export function filterTools(
   tools,
-  { query = "", category = "all", status = "all", scope = "all", pins = new Set() } = {},
+  { query = "", category = "all", status = "all", scope = "all", origin = "all", pins = new Set() } = {},
 ) {
   const words = query.trim().normalize("NFKC").toLocaleLowerCase().split(/\s+/).filter(Boolean);
   return tools.filter((tool) => {
-    const haystack = `${tool.name} ${tool.alias} ${tool.description}`
+    const haystack = `${tool.name} ${tool.alias} ${tool.description} ${tool.tags.join(" ")} ${tool.origin}`
       .normalize("NFKC")
       .toLocaleLowerCase();
     return (
       words.every((word) => haystack.includes(word)) &&
       (category === "all" || tool.category === category) &&
       (status === "all" || tool.status === status) &&
+      (origin === "all" || tool.origin === origin) &&
       (scope === "all" || pins.has(tool.id))
     );
   });
