@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#087f83" />
+    <meta name="theme-color" content="#080e18" />
     <meta
       name="description"
       content="自己的日常工具，一處找到。搜尋、分類、釘選，以及每個工具的開啟方式。"
@@ -15,6 +15,7 @@
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23087f83'/%3E%3Cg fill='white'%3E%3Crect x='7' y='7' width='7' height='7' rx='2'/%3E%3Crect x='18' y='7' width='7' height='7' rx='2'/%3E%3Crect x='7' y='18' width='7' height='7' rx='2'/%3E%3Crect x='18' y='18' width='7' height='7' rx='2'/%3E%3C/g%3E%3C/svg%3E"
     />
     <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./tech.css" />
     <script type="module" src="./app.mjs"></script>
   </head>
   <body>
@@ -40,22 +41,29 @@
           ><span><strong>Playground</strong><small>留一點空間，試試新想法</small></span
           ><span data-icon="arrow"></span>
         </button>
-        <p class="local-note"><span data-icon="monitor"></span>個人本機目錄</p>
+        <p class="local-note"><span data-icon="monitor"></span>個人工具目錄</p>
       </div>
     </aside>
     <main id="main" class="main" tabindex="-1">
       <div class="topline">
         <span>我的工作空間 <span class="slash">/</span> 工具目錄</span
-        ><span class="topline-right">一個工具，一個小幫手</span>
+        ><span class="topline-right">PERSONAL WORKSPACE / 個人工具區</span>
       </div>
       <header class="page-heading">
         <div>
-          <p class="eyebrow">YOUR EVERYDAY TOOLKIT</p>
+          <p class="eyebrow">PERSONAL ORBIT / 個人工具艙</p>
           <h1 id="page-title">所有工具</h1>
           <p class="page-description" id="page-description">從這裡，接著做你想做的事。</p>
         </div>
-        <span class="collection-count" id="collection-count">— 個工具</span>
+        <div class="orbit-display" aria-hidden="true"><div class="orbit-ring ring-one"></div><div class="orbit-ring ring-two"></div><div class="orbit-ring ring-three"></div><div class="orbit-core">日常<span>TOOL NEXUS</span></div><i class="orbit-dot"></i><span class="orbit-coordinate">PERSONAL / 01</span></div>
       </header>
+      <section class="system-strip" aria-label="工具集合摘要">
+        <div><span class="metric-label">COLLECTION / 工具集合</span><strong id="collection-count">— 個工具</strong></div>
+        <div><span class="metric-label">SECTORS / 用途分類</span><strong id="sector-count">—</strong></div>
+        <div><span class="metric-label">SOURCES / 專案來源</span><strong id="source-count">—</strong></div>
+        <div><span class="metric-label">PINNED / 常用工具</span><strong id="favorite-count">—</strong></div>
+      </section>
+
       <div id="storage-warning" class="notice" role="status" hidden></div>
       <div class="toolbar">
         <label class="search-box"
@@ -63,11 +71,12 @@
           ><input
             id="search"
             type="search"
-            placeholder="搜尋工具、名稱或用途…"
-            aria-label="搜尋工具、名稱或用途"
+            placeholder="搜尋工具、用途或標籤…"
+            aria-label="搜尋工具、用途或標籤"
             autocomplete="off"
           /><kbd aria-hidden="true">/</kbd></label
         >
+        <label class="status-control source-control"><span>來源</span><select id="origin" aria-label="專案來源"><option value="all">全部來源</option></select></label>
         <label class="status-control"
           ><span>狀態</span
           ><select id="status" aria-label="使用狀態">
@@ -106,7 +115,7 @@
         <button id="retry" class="primary-button">重新載入</button>
       </div>
       <footer class="main-footer">
-        <span>依自己的步調，慢慢把工具做好。</span><span id="review-note">入口依專案文件整理</span>
+        <span>保持專注，讓工具接手日常。</span><span id="review-note">入口依專案文件整理</span>
       </footer>
     </main>
     <dialog id="detail-dialog" aria-labelledby="detail-title">

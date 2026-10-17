@@ -1,7 +1,8 @@
+import { resolve } from "node:path";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile, access } from "node:fs/promises";
-import { validateCatalog, filterTools, readPins, writePins, PIN_KEY } from "../dist/catalog.mjs";
+import { validateCatalog, filterTools, readPins, writePins, PIN_KEY, CATEGORIES } from "../dist/catalog.mjs";
 
 const catalog = JSON.parse(await readFile(new URL("../dist/tools.json", import.meta.url), "utf8"));
 const copy = () => structuredClone(catalog);
@@ -12,8 +13,8 @@ const examples = catalog.tools
 test("現有清單有效，專案與已登錄 README 的相對路徑存在", async () => {
   assert.ok(validateCatalog(catalog).tools.length > 0);
   for (const tool of catalog.tools) {
-    await access(new URL(`../../${tool.projectPath}/`, import.meta.url));
-    if (tool.readmePath) await access(new URL(`../../${tool.readmePath}`, import.meta.url));
+    await access(resolve(tool.workspaceRoot || catalog.workspaceRoot, tool.projectPath));
+    if (tool.readmePath) await access(resolve(tool.workspaceRoot || catalog.workspaceRoot, tool.readmePath));
   }
 });
 test("名稱、別名、多字搜尋可以和分類、狀態組合", () => {
@@ -22,8 +23,8 @@ test("名稱、別名、多字搜尋可以和分類、狀態組合", () => {
       filterTools(examples, { query }).map((t) => t.id),
       ["finance"],
     );
-  assert.equal(filterTools(examples, { query: "日積", category: "工作學習" }).length, 0);
-  assert.equal(filterTools(examples, { category: "生活管理", status: "待確認" }).length, 2);
+  assert.equal(filterTools(examples, { query: "日積", category: "工作行政" }).length, 0);
+  assert.equal(filterTools(examples, { category: "財務訂閱", status: "待確認" }).length, 1);
   assert.equal(filterTools(examples, { status: "使用中" }).length, 0);
   assert.equal(
     filterTools(examples, { scope: "pinned", pins: new Set(["sports"]) })[0].id,
@@ -89,4 +90,27 @@ test("儲存遭封鎖或內容損壞時回傳提示，仍可使用工具清單",
   assert.ok(writePins(blocked, new Set(["finance"])));
   assert.ok(readPins(() => ({ getItem: () => "{broken" }), new Set()).warning);
   assert.equal(filterTools(catalog.tools, { query: "日積", pins: result.pins }).length, 1);
+});
+
+test("跨專案根目錄需為有效絕對路徑，仍拒絕工具路徑跳脫", () => {
+  for (const root of ["../Project_Ai", "/Users/../tmp", "/tmp\\outside"]) {
+    const value = copy(); value.tools[0].workspaceRoot = root;
+    assert.throws(() => validateCatalog(value), /workspaceRoot/);
+  }
+  const value = copy(); value.tools[0].workspaceRoot = "/Users/ShaoEn/Project_Ai";
+  value.tools[0].projectPath = "../outside";
+  assert.throws(() => validateCatalog(value), /路徑/);
+});
+
+test("七個四字分類完整覆蓋清單，來源與標籤可交叉搜尋", () => {
+  assert.equal(CATEGORIES.length, 7);
+  assert.ok(CATEGORIES.every(c => [...c].length === 4));
+  assert.equal(CATEGORIES.reduce((n, c) => n + filterTools(catalog.tools, {category:c}).length, 0), catalog.tools.length);
+  assert.deepEqual(filterTools(catalog.tools, {query:"Skill", origin:"Project_Ai", category:"工作行政"}).map(t=>t.id), ["tw-labor-reply"]);
+  assert.deepEqual(filterTools(catalog.tools, {query:"醫療", origin:"Claude_Ai_Course", category:"學習教學"}).map(t=>t.id), ["physician-ai-workshop", "chiayi-workshop", "osteoporosis-lab"]);
+  assert.equal(filterTools(catalog.tools, {origin:"Project_Ai",category:"生活旅行"}).length,0);
+  const bad = copy(); bad.tools[0].origin = "unknown";
+  assert.throws(()=>validateCatalog(bad), /來源/);
+  bad.tools[0].origin = "日常工具"; bad.tools[0].tags = [null];
+  assert.throws(()=>validateCatalog(bad), /標籤/);
 });

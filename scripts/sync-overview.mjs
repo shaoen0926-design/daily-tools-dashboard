@@ -1,3 +1,5 @@
+import { relative, resolve, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
 import { readFile, writeFile } from "node:fs/promises";
 import { validateCatalog } from "../dist/catalog.mjs";
 
@@ -20,22 +22,23 @@ const cell = (value) =>
     .replaceAll("]", "\\]");
 const target = (value) => encodeURI(value).replaceAll("(", "%28").replaceAll(")", "%29");
 const rows = catalog.tools.map((tool) => {
+  const localTarget = (path) => target(relative(dirname(fileURLToPath(readmeUrl)), resolve(tool.workspaceRoot || catalog.workspaceRoot, path)));
   const launch = tool.launches.find((item) => item.primary);
   const entry = !launch
     ? "待補入口"
     : launch.type === "web"
       ? `[${cell(launch.label)}](${target(launch.url)})`
       : cell(launch.label) + "；見工具說明";
-  const readme = tool.readmePath ? `[README](${target(tool.readmePath)})` : "尚缺 README";
-  return `| [${cell(tool.name)}](${target(tool.projectPath)}/)｜${cell(tool.alias)} | ${cell(tool.description)} | ${cell(tool.status)} | ${entry} | ${readme} |`;
+  const readme = tool.readmePath ? `[README](${localTarget(tool.readmePath)})` : "尚缺 README";
+  return `| [${cell(tool.name)}](${localTarget(tool.projectPath)}/)${tool.name === tool.alias ? '' : `｜${cell(tool.alias)}`} | ${cell(tool.description)} | ${cell(tool.category)} | ${cell(tool.origin)} | ${cell(tool.tags.join("、"))} | ${cell(tool.status)} | ${entry} | ${readme} |`;
 });
 const table = [
   start,
   "",
   "此表由 `dashboard/dist/tools.json` 產生；請修改清單後在 Dashboard 專案執行 `npm run sync:overview`。",
   "",
-  "| 工具 | 用途 | 狀態 | 主要入口 | 專案說明 |",
-  "| --- | --- | --- | --- | --- |",
+  "| 工具 | 用途 | 分類 | 來源 | 標籤 | 狀態 | 主要入口 | 專案說明 |",
+  "| --- | --- | --- | --- | --- | --- | --- | --- |",
   ...rows,
   "",
   end,
